@@ -518,8 +518,6 @@ footer{padding:70px 0 40px;border-top:1px solid var(--border);}
   .wrap{padding:0 32px;}
   nav{padding:22px 32px;}
   .hero{padding:140px 32px 80px;}
-  .about-grid{grid-template-columns:1fr;gap:0;}
-  .about-spacer{display:none;}
   .hero-bg video{object-position:88% center;}
   .hero-scrim-x{
     background:linear-gradient(180deg,
@@ -529,14 +527,9 @@ footer{padding:70px 0 40px;border-top:1px solid var(--border);}
   }
   .hero-scrim-y{background:none;}
   .hero-copy{max-width:100%;}
-  .about-bg video{object-position:10% center;}
-  .about-scrim-x{
-    background:linear-gradient(180deg,
-      var(--bg2) 0%, rgba(18,18,18,0.72) 16%,
-      rgba(18,18,18,0.32) 38%, rgba(18,18,18,0.24) 56%,
-      rgba(18,18,18,0.58) 80%, var(--bg2) 100%);
-  }
-  .about-scrim-y{background:none;}
+  /* About keeps its video-left / text-right split all the way down to
+     phone width (700px) — only the video's framing needs tuning here */
+  .about-bg video{object-position:14% center;}
   .stat{background:rgba(6,6,6,0.85);}
   .review-card{background:rgba(6,6,6,0.78);}
   .pillars,.plans,.stats-grid,.story-cards{grid-template-columns:repeat(2,1fr);}
@@ -584,6 +577,18 @@ footer{padding:70px 0 40px;border-top:1px solid var(--border);}
   *{overflow-wrap:break-word;word-break:break-word;}
   .wrap{padding:0 24px;}
   .stat,.pillar,.plan,.week,.big-stat,.story-card,.tile{min-width:0;}
+
+  /* phone width — About switches from the video-left/text-right split
+     to the hero's full-bleed-video-behind-full-width-text approach */
+  .about-grid{grid-template-columns:1fr;gap:0;}
+  .about-spacer{display:none;}
+  .about-scrim-x{
+    background:linear-gradient(180deg,
+      var(--bg2) 0%, rgba(18,18,18,0.72) 16%,
+      rgba(18,18,18,0.32) 38%, rgba(18,18,18,0.24) 56%,
+      rgba(18,18,18,0.58) 80%, var(--bg2) 100%);
+  }
+  .about-scrim-y{background:none;}
 
   nav{padding:18px 20px;}
   .brand{font-size:13px;}
