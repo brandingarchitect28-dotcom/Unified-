@@ -253,6 +253,7 @@ section{position:relative;}
   animation:about-zoom 11s ease-in-out infinite alternate;
 }
 @keyframes about-zoom{0%{transform:scale(1);}100%{transform:scale(1.03);}}
+@keyframes about-zoom-mobile{0%{transform:scale(1.14);}100%{transform:scale(1.19);}}
 
 .about-spotlight{
   position:absolute;
@@ -553,7 +554,7 @@ footer{padding:70px 0 40px;border-top:1px solid var(--border);}
   }
 
   /* same treatment for the About section's background video, for consistency */
-  .about-bg video{opacity:0.36; object-position:0% center; mix-blend-mode:normal;}
+  .about-bg video{opacity:0.24; object-position:0% center; mix-blend-mode:normal; animation:about-zoom-mobile 11s ease-in-out infinite alternate;}
   .about-spotlight{opacity:0.5; width:100%; left:0; right:0; top:8%; height:50%;}
   .about-scrim-x{
     background:linear-gradient(180deg,
