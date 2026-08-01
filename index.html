@@ -553,7 +553,7 @@ footer{padding:70px 0 40px;border-top:1px solid var(--border);}
   }
 
   /* same treatment for the About section's background video, for consistency */
-  .about-bg video{opacity:0.36; object-position:20% center; mix-blend-mode:normal;}
+  .about-bg video{opacity:0.36; object-position:0% center; mix-blend-mode:normal;}
   .about-spotlight{opacity:0.5; width:100%; left:0; right:0; top:8%; height:50%;}
   .about-scrim-x{
     background:linear-gradient(180deg,
@@ -561,6 +561,25 @@ footer{padding:70px 0 40px;border-top:1px solid var(--border);}
       rgba(18,18,18,0.4) 40%, rgba(18,18,18,0.32) 58%,
       rgba(18,18,18,0.68) 82%, var(--bg2) 100%);
   }
+}
+
+/* ------------------------------------------------------------------------
+   About/"My Story" background — subject-centering focal-point tuning.
+   This footage is 2404x1352 with the subject occupying roughly the left
+   third of the frame (x≈0-745px). object-fit:cover's crop width in source
+   pixels is source_height * (viewport_width/viewport_height) — that crop
+   width changes with a phone's aspect ratio, so the object-position value
+   that actually centers the subject shifts slightly across phone sizes.
+   Values below are solved from that math per breakpoint, not eyeballed.
+   Portrait-only, capped at 700px — tablets/iPad/desktop are untouched
+   and keep using the base .about-bg video rule above. ---------------- */
+@media (max-width:700px) and (orientation:portrait) and (min-width:381px){
+  /* standard phones: iPhone 13/14/15, most Android (~390-430px wide) */
+  .about-bg video{object-position:4% center;}
+}
+@media (max-width:700px) and (orientation:portrait) and (min-width:431px){
+  /* larger phones/phablets: Pro Max and similar (~431-700px wide) */
+  .about-bg video{object-position:2% center;}
 }
 
 /* ============================================================
