@@ -1,19 +1,27 @@
-# Younifiedd Fitness — Mobile "My Story" Video Fix (scoped)
+# Younifiedd — Fitness + Trading (Unified)
 
-## The one change
-Inside `@media (max-width:700px) and (orientation:portrait)` only, the
-About/"My Story" background video still had `mix-blend-mode:screen`
-inherited from the base desktop rule. That blend mode is what was crushing
-the video to black behind the title and timeline — screen blending against
-a near-black backdrop only lets bright highlights through, so most of the
-footage effectively disappeared, and it read as "the video isn't filling
-the frame" even though `object-fit:cover` was already sizing it correctly.
+Two static pages sharing one brand system, linked together with a smooth
+cross-fade page transition:
 
-Added `mix-blend-mode:normal;` to that one mobile-portrait rule. That's the
-entire change — one line, inside the existing mobile-only block. Opacity
-(0.42), cropping (12% center), desktop, tablet, and every other section are
-untouched.
+- `index.html` — Fitness (YOUNIFIEDD) landing page. Home page.
+- `trading.html` — Trading (Younifiedd Trading) landing page.
 
-## Deploy to Netlify
-Drag this folder onto https://app.netlify.com/drop, or connect it via
-"Add new site" > "Deploy manually."
+## Navigation
+
+- On the fitness page, tapping **Finance** in the floating nav plays a
+  brand-colored fade transition, then loads `trading.html`.
+- On the trading page, tapping **Fitness** (top-left of the nav) plays the
+  same transition back to `index.html`.
+
+The transition is a small fixed-position overlay (`#pageTransition`) with a
+150–200ms fade-in, a short hold, then the browser navigates to the target
+page. A `sessionStorage` flag (`yn_transition`) tells the destination page it
+arrived via this transition, so it starts with the overlay visible and fades
+it out on load instead of a hard cut — giving the illusion of one continuous
+app even though it's two plain HTML files.
+
+## Deploy
+
+Drag-and-drop this folder onto Netlify, or connect the GitHub repo — no
+build step required, everything is static HTML/CSS/JS with inline
+base64 media.
