@@ -1,7 +1,7 @@
 # Younifiedd — Fitness + Finance + AI Automation (Unified)
 
-Three static pages sharing one brand system, linked together with a cinematic
-cross-page loading transition triggered from the same floating navbar:
+Three static pages sharing one brand system, linked with a cinematic
+cross-page loading transition triggered from the same floating navbar.
 
 - `index.html` — Fitness (YOUNIFIEDD) landing page. Home page.
 - `trading.html` — Finance / Trading landing page.
@@ -14,26 +14,25 @@ icons — Fitness / Finance / AI Automation — and a CTA pill).
 
 ## Cinematic loading transition
 
-Tapping a nav icon plays a short themed "brand mark" glimpse (~650ms) on the
-page you're leaving, then a full cinematic loading scene plays on the
-destination page for ~1.9s before fading into that page's hero:
+All three themed loading scenes (gold fitness rings, emerald finance sphere,
+purple AI cube) are embedded on **every page**, not just their "home" page.
+The moment you tap a nav icon, JS reads which link was tapped and shows the
+matching scene immediately — so tapping Finance from the Fitness page shows
+the emerald scene right away, not a mismatched gold one. That choice is also
+carried across the page load (via `sessionStorage`) so the destination page
+resumes the same themed scene instead of restarting on a different one.
 
-- **Fitness** (gold): concentric rotating rings around a glowing dumbbell,
-  orbiting particles, a thin progress line with a traveling light.
-- **Finance** (emerald): a glass sphere with an animated candlestick chart
-  and world-map texture, orbiting currency symbols, an animated wave line.
-- **AI Automation** (purple): a rotating translucent glass cube labelled
-  "AI", surrounded by 8 floating nodes (OpenAI, Claude, Gemini, API, MCP,
-  RAG, Workflow, Automation), a circular progress ring.
+Flow: tap → correct themed scene fades in on the current page (~650ms) →
+browser navigates → destination page shows the same scene already active →
+full cinematic plays (~1.9s) → scene fades out while that page's hero
+scales/blurs in underneath, so it reads as one continuous motion.
 
-Mechanics: a `sessionStorage` flag (`yn_transition`) tells the destination
-page it arrived via in-app navigation. A tiny inline script at the very top
-of `<head>` reads that flag synchronously and adds `pt-loading` to `<html>`
-before first paint, which hides that page's hero (blurred/scaled out) so
-there's no flash of content before the loader finishes. The loader then
-fades out and the hero animates in as one continuous motion. Landing on any
-page directly (bookmark, fresh URL) skips the loader entirely — it only
-plays for in-app navigation between the three pages.
+Mechanics: `sessionStorage` flags (`yn_transition`, `yn_theme`) tell the
+destination page it arrived via in-app navigation and which scene to show.
+A tiny inline script at the very top of `<head>` reads `yn_transition`
+synchronously and adds `pt-loading` to `<html>` before first paint, hiding
+that page's hero (blurred/scaled out) until the loader finishes — no flash
+of content. Direct visits (bookmark, fresh URL) skip the loader entirely.
 
 ## Deploy
 
