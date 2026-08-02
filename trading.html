@@ -663,7 +663,7 @@ nav .brand-accent{color:var(--gold);}
       </svg>
       <span>Finance</span>
     </a>
-    <a href="#" class="nav-item" data-nav="ai">
+    <a href="ai-automation.html" class="nav-item" data-nav="ai">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <rect x="5" y="8" width="14" height="10" rx="3"/>
         <path d="M12 8V4"/>
@@ -1021,7 +1021,7 @@ nav .brand-accent{color:var(--gold);}
   items.forEach(el => {
     el.addEventListener('click', (e) => {
       if (el.getAttribute('href') === '#'){ e.preventDefault(); }
-      if (el.getAttribute('data-nav') === 'fitness') return; /* handled by the cross-page transition script */
+      if (el.getAttribute('data-nav') === 'fitness' || el.getAttribute('data-nav') === 'ai') return; /* handled by the cross-page transition script */
       setActive(el);
     });
   });
@@ -1313,7 +1313,7 @@ if (!reduceMotion){
 </script>
 
 <script>
-/* ---------- smooth cross-page transition (trading <-> fitness) ---------- */
+/* ---------- smooth cross-page transition (trading <-> fitness <-> ai automation) ---------- */
 (function(){
   const overlay = document.getElementById('pageTransition');
   if (!overlay) return;
@@ -1334,13 +1334,12 @@ if (!reduceMotion){
     setTimeout(() => { window.location.href = url; }, 520);
   }
 
-  const backLink = document.querySelector('.nav-item[data-nav="fitness"]');
-  if (backLink){
-    backLink.addEventListener('click', function(e){
+  document.querySelectorAll('.nav-item[data-nav="fitness"], .nav-item[data-nav="ai"]').forEach(link=>{
+    link.addEventListener('click', function(e){
       e.preventDefault();
-      goTo(backLink.getAttribute('href'));
+      goTo(link.getAttribute('href'));
     });
-  }
+  });
 })();
 </script>
 </body>
