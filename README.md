@@ -15,24 +15,24 @@ icons — Fitness / Finance / AI Automation — and a CTA pill).
 ## Cinematic loading transition
 
 All three themed loading scenes (gold fitness rings, emerald finance sphere,
-purple AI cube) are embedded on **every page**, not just their "home" page.
-The moment you tap a nav icon, JS reads which link was tapped and shows the
-matching scene immediately — so tapping Finance from the Fitness page shows
-the emerald scene right away, not a mismatched gold one. That choice is also
-carried across the page load (via `sessionStorage`) so the destination page
-resumes the same themed scene instead of restarting on a different one.
+purple AI cube) are embedded on **every page**. The moment you tap a nav
+icon, JS reads which link was tapped and shows the matching scene
+immediately, and that choice is carried across the page load via
+`sessionStorage` so the destination page resumes the same themed scene.
 
-Flow: tap → correct themed scene fades in on the current page (~650ms) →
-browser navigates → destination page shows the same scene already active →
-full cinematic plays (~1.9s) → scene fades out while that page's hero
-scales/blurs in underneath, so it reads as one continuous motion.
+## Trading page videos
 
-Mechanics: `sessionStorage` flags (`yn_transition`, `yn_theme`) tell the
-destination page it arrived via in-app navigation and which scene to show.
-A tiny inline script at the very top of `<head>` reads `yn_transition`
-synchronously and adds `pt-loading` to `<html>` before first paint, hiding
-that page's hero (blurred/scaled out) until the loader finishes — no flash
-of content. Direct visits (bookmark, fresh URL) skip the loader entirely.
+- **Hero background** — swapped to the "person sitting" video (portrait,
+  dark/moody), matching the page's dark aesthetic. `object-position` is
+  tuned per breakpoint (desktop `50% 30%`, mobile `50% 25%`) so the subject
+  stays framed as the crop area changes shape on smaller screens.
+- **Final CTA background** — the hand-writing-on-charts video now plays
+  behind the closing call-to-action section (previously a static image),
+  reusing the same `.parallax-media` scroll behavior. Object-position is
+  tuned per breakpoint here too (`60% center` desktop, `70% center` mobile)
+  to keep the hand/chart subject in frame.
+- Both videos autoplay muted/looped with a poster frame (extracted from
+  each video) so there's no flash of blank space before playback starts.
 
 ## Deploy
 
